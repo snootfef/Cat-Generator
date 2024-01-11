@@ -4,7 +4,7 @@ h1 {
   margin: 75px 150px;
 }
 
-h2 {
+p {
   margin: 25px 150px;
   font-size: 25px;
 }
@@ -41,6 +41,15 @@ h2 {
   font-family: "Roboto Mono";
   border: dotted;
 }
+
+.interactionSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.likeButton {}
+
+.dislikeButton {}
 
 button {
   margin: 75px 150px;
