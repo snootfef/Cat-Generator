@@ -9,6 +9,11 @@ p {
   font-size: 25px;
 }
 
+button {
+  margin: 75px 150px;
+  color: #8972ac;
+}
+
 .page {
   width: 100vw;
   height: 100vh;
@@ -51,7 +56,11 @@ p {
 
 .dislikeButton {}
 
-button {
-  margin: 75px 150px;
-  color: #8972ac;
+.dialogueText {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.dialogueText::-webkit-scrollbar {
+  display: none;
 }

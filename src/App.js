@@ -2,17 +2,19 @@ import './App.css';
 import { useState } from "react";
 
 let catNames = ['Sniff', 'Mushroom', 'Fish', 'Onion', 'Chup', 'Mr. Whale', 'Gorp'];
-let cats = catNames.map((names) => ({ name: names, text: [], rating: 0 }));
-let clicked;
+let cats = catNames.map((names) => ({ name: names, text: [], rating: 0, image: names + '.jpg' }));
 
 export default function App() {
   const [currentCat, setCurrentCat] = useState(0);
   const [likes, setLikes] = useState(0);
+  const [text, setText] = useState(null);
   const [clicked, setClicked] = useState(false);
+  let fileName = "\\assets\\" + cats[currentCat].image;
 
   function handleClick() {
     let num = Math.floor(Math.random() * cats.length);
     while (num === currentCat) num = Math.floor(Math.random() * cats.length);
+    cats[num].text.push(generateText());
     setClicked(false);
     setCurrentCat(num);
   }
@@ -24,34 +26,44 @@ export default function App() {
           <h1>{cats[currentCat].rating}</h1>
           <h1>{cats[currentCat].name}</h1>
         </section>
+        <img src={fileName} alt='Sniff the cat'></img>
       </div>
       <div className='column2'>
         <button className='button' onClick={handleClick}>New Cat</button>
-        <Dialogue index={currentCat} setLikes={setLikes} clicked={clicked} setClicked={setClicked}></Dialogue>
+        <Dialogue index={currentCat} setLikes={setLikes} clicked={clicked} setClicked={setClicked} setText={setText} ></Dialogue>
       </div>
-    </div>
+    </div >
   );
 }
 
-function Dialogue({ index, setLikes, clicked, setClicked }) {
+function Dialogue({ index, setLikes, clicked, setClicked, setText }) {
   if (cats[index].text.length === 0)
     cats[index].text.push(generateText());
 
   function handleClick(like) {
     if (!clicked) {
-      if (like) cats[index].rating++;
-      else cats[index].rating--;
+      if (like) {
+        cats[index].rating++;
+        cats[index].text.push('You liked this!');
+      }
+      else {
+        cats[index].rating--;
+        cats[index].text.push('You disliked this!');
+      }
       setClicked(true);
       setLikes(cats[index].rating);
+      setText(cats[index].text);
     }
   }
 
   return (
     <div>
-      {cats[index].text.map((string) => <p>{string}</p>)}
+      <section className='dialogueText'>
+        {cats[index].text.map((string) => <p>{string}</p>)}
+      </section>
       <section className='section1'>
-        <button onClick={() => handleClick(true)}>Like</button>
-        <button onClick={() => handleClick(false)}>Dislike</button>
+        {!clicked && <button onClick={() => handleClick(true)}>Like</button>}
+        {!clicked && <button onClick={() => handleClick(false)}>Dislike</button>}
       </section>
     </div>
   );
@@ -71,6 +83,6 @@ function generateText() {
     endText = Math.floor(Math.random() * 7);
     puncNum = Math.floor(Math.random() * 4)
   }
-  return text;
+  return text === '' ? '...' : text;
 }
 
