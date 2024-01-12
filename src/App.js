@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from "react";
+import Modal from './Modal';
 
 let catNames = ['Sniff', 'Mushroom', 'Fish', 'Onion', 'Chup', 'Mr. Whale', 'Gorp'];
 let cats = catNames.map((names) => ({ name: names, text: [], rating: 0, image: names + '.jpg' }));
@@ -9,7 +10,9 @@ export default function App() {
   const [likes, setLikes] = useState(0);
   const [text, setText] = useState(null);
   const [clicked, setClicked] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   let fileName = "\\assets\\" + cats[currentCat].image;
+  let altText = cats[currentCat].name + " the cat";
 
   function handleClick() {
     let num = Math.floor(Math.random() * cats.length);
@@ -26,12 +29,16 @@ export default function App() {
           <h1>{cats[currentCat].rating}</h1>
           <h1>{cats[currentCat].name}</h1>
         </section>
-        <img src={fileName} alt='Sniff the cat'></img>
+        <img className='catImg' src={fileName} alt={altText}></img>
       </div>
       <div className='column2'>
-        <button className='button' onClick={handleClick}>New Cat</button>
+        <section className='interactionSection'>
+          <button className='button' onClick={handleClick}>New Cat</button>
+          <button onClick={() => setOpenModal(true)}>Rating</button>
+        </section>
         <Dialogue index={currentCat} setLikes={setLikes} clicked={clicked} setClicked={setClicked} setText={setText} ></Dialogue>
       </div>
+      <Modal open={openModal} onClose={() => setOpenModal(false)}></Modal>
     </div >
   );
 }
@@ -58,10 +65,10 @@ function Dialogue({ index, setLikes, clicked, setClicked, setText }) {
 
   return (
     <div>
-      <section className='dialogueText'>
+      <section className='dialogueBox'>
         {cats[index].text.map((string) => <p>{string}</p>)}
       </section>
-      <section className='section1'>
+      <section className='interactionSection'>
         {!clicked && <button onClick={() => handleClick(true)}>Like</button>}
         {!clicked && <button onClick={() => handleClick(false)}>Dislike</button>}
       </section>
