@@ -1,7 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 h1 {
-  padding: 0px 50px;
+  font-size: 2.4rem;
+  margin-left: 2vw;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 2.16rem;
+  margin-left: 1.5vw;
+  margin-top: 6px;
+  margin-bottom: 0;
 }
 
 p {
@@ -9,66 +19,63 @@ p {
   font-size: 25px;
 }
 
-button {
-  margin: 0px 50px;
-  color: #8972ac;
-}
+button {}
 
 .page {
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: row;
-  background-color: #e8d5c4;
-  color: #8972ac;
+  background-color: #E8E4E4;
+  color: var(--Black, #232323);
+  font-family: "Press Start 2P";
 }
 
-.column1 {
+.columnLeft {
   padding-top: 50px;
-  min-height: 100vh;
+  padding-left: 10vw;
+  padding-right: 5vw;
+  /*viewport width*/
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.columnRight {
+  padding-top: 50px;
+  padding-left: 5vw;
+  padding-right: 10vw;
   width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
-  font-family: "Roboto Mono";
-  border: dotted;
 }
 
-.column2 {
-  padding-top: 50px;
-  min-height: 100vh;
-  width: 50%;
+.catName {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
-  font-family: "Roboto Mono";
-  border: dotted;
+  flex-direction: row;
+  padding: 3vh 0;
 }
 
-.interactionSection {
+.PiCat {
+  font-size: 3rem;
+  color: var(--Black);
+}
+
+.catRating {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  padding: 3vh 0;
 }
 
-.likeButton {}
-
-.dislikeButton {}
-
-.dialogueBox {
-  height: 400px;
-  width: 600px;
-  overflow-y: scroll;
-  margin: 50px;
-  border: dotted;
-  padding: 25px;
-}
-
-.dialogueBox::-webkit-scrollbar {
-  display: none;
+.ratingHeart {
+  font-size: 2.45rem;
+  fill: #D44;
+  stroke-width: 1.1rem;
+  stroke: #232323;
 }
 
 .modalContainer {
@@ -89,8 +96,135 @@ button {
   height: 100%;
 }
 
+.catImgBorder {
+  padding: 7px 3px;
+  width: 100%;
+  height: 100%;
+  border: 10px solid #232323;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 63vh;
+}
+
 .catImg {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  width: 500px;
-  height: 550px;
+  border: 4px solid #000;
+}
+
+.editCat {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 2.28vh 0;
+  width: 100%;
+}
+
+.catButtons {
+  margin: 0 0 0 2vw;
+  padding: 0.6vh 0.6vw;
+  border-radius: 10px;
+  border: 4px solid #000;
+  background: #FFF;
+  box-shadow: 5px 5px 0px 3px rgba(0, 0, 0, 0.65);
+  font-size: 1.3rem;
+  font-family: 'Press Start 2P';
+}
+
+.catButtons:hover {
+  transform: scale(1.1);
+}
+
+.dialogueBorder {
+  padding: 7px 3px;
+  width: 100%;
+  height: 55%;
+  border: 10px solid #232323;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 63vh;
+}
+
+.dialogueBox {
+  width: 100%;
+  height: 100%;
+  border: 4px solid #232323;
+  overflow-y: scroll;
+}
+
+.dialogueBox::-webkit-scrollbar {
+  display: none;
+}
+
+.generatedText {
+  border-radius: 25px;
+  border: dotted;
+  position: relative;
+  padding: 2.5vh 1.5vw;
+  margin: 2.5vh 1.5vw 0 1.5vw;
+}
+
+.likeBoxes {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.generatedBox {
+  width: 100%;
+}
+
+.likedText {
+  display: flex;
+  justify-content: flex-end;
+  border-radius: 25px;
+  border: dotted;
+  padding: 2.5vh 1.5vw;
+  margin: 2.5vh 1.5vw 0 1.5vw;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.generatedText:after {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  bottom: 25%;
+  border: 20px solid transparent;
+  border-right-color: #8972ac;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: 0;
+  margin-left: -20px;
+}
+
+.likeSection {
+  padding-top: 1vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.likeButtons {
+  border: none;
+  background: transparent;
+}
+
+.likeButtons:hover {
+  transform: scale(1.1);
+}
+
+.likeHearts {
+  font-size: 5.4rem;
+  fill: #FFF;
+  stroke-width: 0.75rem;
+  stroke: #232323;
 }

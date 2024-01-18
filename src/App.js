@@ -1,6 +1,9 @@
 import './App.css';
 import { useState } from "react";
 import Modal from './Modal';
+import { PiCat } from "react-icons/pi";
+import { PiHeartFill } from "react-icons/pi";
+import { PiHeartBreakFill } from "react-icons/pi";
 
 let catNames = ['Sniff', 'Mushroom', 'Fish', 'Onion', 'Chup', 'Mr. Whale', 'Gorp'];
 let cats = catNames.map((names) => ({ name: names, text: [], rating: 0, image: names + '.jpg' }));
@@ -24,17 +27,23 @@ export default function App() {
 
   return (
     <div className='page'>
-      <div className='column1'>
-        <section className='interactionSection'>
-          <h1>{cats[currentCat].rating}</h1>
+      <div className='columnLeft'>
+        <section className='catName'>
+          <PiCat className='PiCat' />
           <h1>{cats[currentCat].name}</h1>
         </section>
-        <img className='catImg' src={fileName} alt={altText}></img>
+        <picture className='catImgBorder'>
+          <img className='catImg' src={fileName} alt={altText}></img>
+        </picture>
+        <section className='catRating'>
+          <PiHeartFill className='ratingHeart' />
+          <h2>{cats[currentCat].rating}</h2>
+        </section>
       </div>
-      <div className='column2'>
-        <section className='interactionSection'>
-          <button className='button' onClick={handleClick}>New Cat</button>
-          <button onClick={() => setOpenModal(true)}>Rating</button>
+      <div className='columnRight'>
+        <section className='editCat'>
+          <button className='catButtons' onClick={handleClick}>new<br />cat</button>
+          <button className='catButtons' onClick={() => setOpenModal(true)}>rat<br />ing</button>
         </section>
         <Dialogue index={currentCat} setLikes={setLikes} clicked={clicked} setClicked={setClicked} setText={setText} ></Dialogue>
       </div>
@@ -64,15 +73,21 @@ function Dialogue({ index, setLikes, clicked, setClicked, setText }) {
   }
 
   return (
-    <div>
-      <section className='dialogueBox'>
-        {cats[index].text.map((string) => <p>{string}</p>)}
+    <>
+      <section className='dialogueBorder'>
+        <section className='dialogueBox'>
+          {cats[index].text.map((string) => <div className={string.startsWith('Y') ? 'likeBoxes' : 'generatedBox'}><p className={string.startsWith('Y') ? 'likedText' : 'generatedText'}>{string}</p></div>)}
+        </section>
+      </section >
+      <section className='likeSection'>
+        {!clicked && <button className='likeButtons' onClick={() => handleClick(true)}>
+          <PiHeartFill className='likeHearts' />
+        </button>}
+        {!clicked && <button className='likeButtons' onClick={() => handleClick(false)}>
+          <PiHeartBreakFill className='likeHearts' />
+        </button>}
       </section>
-      <section className='interactionSection'>
-        {!clicked && <button onClick={() => handleClick(true)}>Like</button>}
-        {!clicked && <button onClick={() => handleClick(false)}>Dislike</button>}
-      </section>
-    </div>
+    </>
   );
 }
 
