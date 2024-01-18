@@ -14,6 +14,7 @@ export default function App() {
   const [text, setText] = useState(null);
   const [clicked, setClicked] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+
   let fileName = "\\assets\\" + cats[currentCat].image;
   let altText = cats[currentCat].name + " the cat";
 
@@ -47,7 +48,7 @@ export default function App() {
         </section>
         <Dialogue index={currentCat} setLikes={setLikes} clicked={clicked} setClicked={setClicked} setText={setText} ></Dialogue>
       </div>
-      <Modal open={openModal} onClose={() => setOpenModal(false)}></Modal>
+      <Modal open={openModal} onClose={() => setOpenModal(false)} cats={cats}></Modal>
     </div >
   );
 }
